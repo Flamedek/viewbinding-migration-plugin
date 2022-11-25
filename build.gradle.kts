@@ -18,23 +18,15 @@ repositories {
 intellij {
     version.set("2021.3.3")
     type.set("IC") // Target IDE Platform
-//    type.set("AI") // Target Android Studio
-    pluginName.set(project.name)
 
     plugins.set(listOf("android", "org.jetbrains.kotlin"))
 }
 
 dependencies {
-//    implementation(kotlin("reflect"))
-    compileOnly(fileTree("lib") { include("*.jar") })
     compileOnly(fileTree("${androidStudioPath()}/plugins/android/lib") {
         include("android-base-common.jar")
         include("android-extensions-ide.jar")
     })
-
-    // all jars:
-//    compileOnly(fileTree("$androidStudioPath/plugins/android/lib") { include("*.jar") })
-//    compileOnly(fileTree("$androidStudioPath/lib") { include("*.jar") })
 }
 
 tasks {

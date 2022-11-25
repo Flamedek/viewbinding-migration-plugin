@@ -19,12 +19,12 @@ class RenameOptionsDialog(
 
     private val props = PropertiesComponent.getInstance(project)
 
-    var addAccessor: Boolean = true
-    var accessor: String = "binding"
+    var addReceiver: Boolean = true
+    var receiverName: String = "binding"
 
     init {
-        addAccessor = props.getBoolean(ADD_ACCESSOR, addAccessor)
-        accessor = props.getValue(STR_ACCESSOR, accessor)
+        addReceiver = props.getBoolean(ADD_RECEIVER, addReceiver)
+        receiverName = props.getValue(STR_RECEIVER, receiverName)
 
         title = "Rename Variables"
         init()
@@ -36,24 +36,24 @@ class RenameOptionsDialog(
 
     override fun dispose() {
         super.dispose()
-        props.setValue(ADD_ACCESSOR, addAccessor)
-        props.setValue(STR_ACCESSOR, accessor)
+        props.setValue(ADD_RECEIVER, addReceiver)
+        props.setValue(STR_RECEIVER, receiverName)
     }
 
     override fun createCenterPanel(): JComponent {
         return panel {
             titledRow("Rename Variables") {
                 fullRow {
-                    checkBox("Add accessor prefix",
-                        getter = { addAccessor },
-                        setter = { value -> addAccessor = value },
+                    checkBox("Add receiver prefix",
+                        getter = { addReceiver },
+                        setter = { value -> addReceiver = value },
                     )
                 }
                 fullRow {
-                    label("Accessor name")
+                    label("Receiver name")
                     textField(
-                        getter = { accessor },
-                        setter = { value -> accessor = value },
+                        getter = { receiverName },
+                        setter = { value -> receiverName = value },
                     )
                 }
                 hideableRow("Preview (${variables.size} items)") {
@@ -71,7 +71,7 @@ class RenameOptionsDialog(
 
     companion object {
         private const val NS = "ViewBindingRename"
-        private const val ADD_ACCESSOR = "$NS.addAccessor"
-        private const val STR_ACCESSOR = "$NS.accessor"
+        private const val ADD_RECEIVER = "$NS.addReceiver"
+        private const val STR_RECEIVER = "$NS.receiver"
     }
 }

@@ -13,7 +13,6 @@ import com.intellij.openapi.util.Computable
 import com.intellij.psi.PsiDocumentManager
 import com.intellij.psi.util.PsiTreeUtil
 import com.intellij.psi.xml.XmlAttributeValue
-import org.jetbrains.kotlin.android.synthetic.AndroidConst
 import org.jetbrains.kotlin.idea.references.KtSimpleNameReference
 import org.jetbrains.kotlin.psi.KtFile
 import org.jetbrains.kotlin.psi.KtNameReferenceExpression
@@ -59,8 +58,8 @@ class RenameAction : AnAction() {
                     for (element in variables) {
                         val before = element.parent.text
                         // add accessor and dot
-                        if (dialog.addAccessor && dialog.accessor.isNotBlank() && element.prevSibling == null) {
-                            element.parent.addBefore(psiFactory.createSimpleName(dialog.accessor), element)
+                        if (dialog.addReceiver && dialog.receiverName.isNotBlank() && element.prevSibling == null) {
+                            element.parent.addBefore(psiFactory.createSimpleName(dialog.receiverName), element)
                             element.parent.addBefore(psiFactory.createDot(), element)
                         }
                         // rename
