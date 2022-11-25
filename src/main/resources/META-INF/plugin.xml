@@ -1,0 +1,45 @@
+<!-- Plugin Configuration File. Read more: https://plugins.jetbrains.com/docs/intellij/plugin-configuration-file.html -->
+<idea-plugin>
+    <!-- Unique identifier of the plugin. It should be FQN. It cannot be changed between the plugin versions. -->
+    <id>com.miniclip.appstudio.viewbinding-migration-plugin</id>
+
+    <!-- Public plugin name should be written in Title Case.
+         Guidelines: https://plugins.jetbrains.com/docs/marketplace/plugin-overview-page.html#plugin-name -->
+    <name>Synthetic to ViewBinding Migration</name>
+
+    <!-- A displayed Vendor name or Organization ID displayed on the Plugins Page. -->
+    <vendor email="support@miniclip.com" url="https://www.miniclip.nl">MiniClip</vendor>
+
+    <!-- Description of the plugin displayed on the Plugin Page and IDE Plugin Manager.
+         Simple HTML elements (text formatting, paragraphs, and lists) can be added inside of <![CDATA[ ]]> tag.
+         Guidelines: https://plugins.jetbrains.com/docs/marketplace/plugin-overview-page.html#plugin-description -->
+    <description><![CDATA[
+      Helper to find references to Android View ids and rename them for ViewBinding usage.
+  ]]></description>
+
+    <!-- Product and plugin compatibility requirements.
+         Read more: https://plugins.jetbrains.com/docs/intellij/plugin-compatibility.html -->
+    <depends>com.intellij.modules.platform</depends>
+    <depends>com.intellij.modules.lang</depends>
+<!--    <depends>com.intellij.java</depends>-->
+    <depends>org.jetbrains.kotlin</depends>
+    <depends>org.jetbrains.android</depends>
+
+    <!-- Extension points defined by the plugin.
+         Read more: https://plugins.jetbrains.com/docs/intellij/plugin-extension-points.html -->
+    <extensions defaultExtensionNs="com.intellij">
+        <!-- Add your extensions here -->
+        <notificationGroup id="com.miniclip.appstudio.viewbinding-migration.notify" displayType="BALLOON" />
+    </extensions>
+
+    <actions>
+        <!-- Add your actions here -->
+        <action id="RenameAction"
+                class="com.miniclip.appstudio.viewbinding.RenameAction"
+                text="Rename Variables for ViewBinding"
+                description="Process variables currently written in snake_case to pascalCase, ready for viewBinding.">
+            <add-to-group group-id="RefactoringMenu" anchor="last" />
+            <keyboard-shortcut keymap="$default" first-keystroke="shift ctrl Y" />
+        </action>
+    </actions>
+</idea-plugin>
